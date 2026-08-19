@@ -1,0 +1,243 @@
+</head>
+<body>
+<!-- Particles -->
+<canvas id="pc"></canvas>
+
+<!-- Audio -->
+<audio id="bgm" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/azkrekk/undangan-rekiya/main/musik.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Toast & Lightbox -->
+<div class="copy-toast" id="copyToastNotification">✓ Nomor rekening tersalin</div>
+<div class="lightbox" id="imageLightbox"><button class="lb-close" onclick="closeLb()">✕</button><img id="lb-img" src=""></div>
+
+<!-- Music Player Floating Button -->
+<button id="mp" onclick="toggleMusic()" title="Play / Pause" aria-label="Play atau pause musik">
+  <div class="disc" id="disc"></div>
+</button>
+
+<!-- Floating Nav Bar -->
+<nav class="f-nav" id="fnav" style="display:none" aria-label="Navigasi halaman">
+  <a class="f-nav-btn" href="#home"      title="Home">🏠</a>
+  <a class="f-nav-btn" href="#mempelai"  title="Mempelai">💑</a>
+  <a class="f-nav-btn" href="#acara"     title="Acara">📅</a>
+  <a class="f-nav-btn" href="#rsvp"      title="RSVP">✉</a>
+  <a class="f-nav-btn" href="#gift"      title="Gift">🎁</a>
+</nav>
+
+<!-- ════════════════════════════════════════════
+     DIORAMA COVER (MENTAL CANVAS)
+     Menggunakan transisi 3D perspective
+     ════════════════════════════════════════════ -->
+<div id="cover">
+  <div class="diorama-scene">
+    <div class="diorama-layer d-bg"></div>
+    <div class="diorama-layer d-mountain"><img src="assets/img/mountain.png" alt=""></div>
+    <div class="diorama-layer d-joglo"><img src="assets/img/joglo.png" alt=""></div>
+    <div class="diorama-layer d-gunungan"><img src="assets/img/gunungan.png" alt=""></div>
+    <div class="diorama-layer d-leaves">
+      <img src="assets/img/rama.png" class="l-tl" alt="">
+      <img src="assets/img/Shinta.png" class="l-tr" alt="">
+    </div>
+  </div>
+  
+  <div class="cover-content">
+    <p class="eyebrow" style="margin-bottom:0.5rem">The Wedding Of</p>
+    <h1 class="cover-names gold-text">Azki <span class="amp">&</span> Rein</h1>
+    <p class="cover-date">28 . 11 . 2026</p>
+    
+    <div class="cover-guest">
+      <p class="eyebrow" style="font-size:0.55rem">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p class="cover-guest-name" id="cover-guest-name">Tamu Undangan</p>
+    </div>
+    
+    <button class="btn-open" onclick="openInvitation()">Buka Undangan</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     MAIN CONTENT (DEEP PARALLAX)
+     ════════════════════════════════════════════ -->
+<main id="main">
+
+  <!-- HERO -->
+  <section class="section hero-sec" id="home">
+    <div class="sec-bg" style="--speed: 0.3"><img src="assets/img/mountain.png" alt=""></div>
+    <div class="sec-bg" style="--speed: 0.15; opacity: 0.5"><img src="assets/img/joglo.png" alt="" style="margin-top:-20vh"></div>
+    
+    <div class="reveal">
+      <p class="eyebrow">Walimatul 'Urs</p>
+      <img src="assets/img/gunungan.png" alt="" style="width: 70px; margin: 1rem 0; opacity: 0.2">
+      <h2 class="hero-title gold-text">Azki <em>&</em> Rein</h2>
+      <p class="eyebrow" style="margin-top:1.5rem">Sabtu, 28 November 2026</p>
+    </div>
+    
+    <div class="scroll-indicator">
+      <p class="eyebrow" style="font-size:0.5rem; margin:0">Scroll Down</p>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- AYAT -->
+  <section class="section">
+    <div class="glass-card reveal">
+      <h3 class="gold-text" style="font-family:'Amiri', serif; font-size:1.5rem; margin-bottom:1.5rem">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</h3>
+      <p style="font-family:'Cormorant Garamond', serif; font-style:italic; font-size:1.05rem; color:var(--text-muted); line-height:1.8">
+        "Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+      </p>
+      <p class="eyebrow" style="margin-top:1.5rem">(QS. Ar-Rum: 21)</p>
+    </div>
+  </section>
+
+  <!-- MEMPELAI -->
+  <section class="section" id="mempelai">
+    <div class="sec-bg" style="--speed: -0.1"><img src="assets/img/gunungan.png" alt="" style="opacity:0.04; transform:scale(1.4)"></div>
+    <div class="reveal">
+      <p class="eyebrow">Mempelai Pernikahan</p>
+      <div class="couple-grid">
+        <div class="couple-item reveal d1">
+          <div class="c-photo"><img src="assets/img/azkia.png" alt="Azkiya Tsany Baharsyah" onerror="this.parentElement.innerHTML='🤵'"></div>
+          <p class="eyebrow">Mempelai Pria</p>
+          <h2 class="c-name">Azkiya</h2>
+          <p style="font-family:'Cormorant Garamond', serif; font-size:1.1rem; color:var(--gold); margin-bottom:0.5rem">Azkiya Tsany Baharsyah, M.Ag.</p>
+          <p class="c-desc">Putra dari<br><strong>Bapak Muntohar & Ibu Siti Asbangunah</strong></p>
+        </div>
+        <div class="c-and reveal d2">&</div>
+        <div class="couple-item reveal d3">
+          <div class="c-photo"><img src="assets/img/rein.png" alt="Reineta Dian Kusumawati" onerror="this.parentElement.innerHTML='👰'"></div>
+          <p class="eyebrow">Mempelai Wanita</p>
+          <h2 class="c-name">Reineta</h2>
+          <p style="font-family:'Cormorant Garamond', serif; font-size:1.1rem; color:var(--gold); margin-bottom:0.5rem">Reineta Dian Kusumawati, S.Pd.</p>
+          <p class="c-desc">Putri dari<br><strong>Bapak Toyik Haryanto & Ibu Nur 'Aini</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACARA & COUNTDOWN -->
+  <section class="section" id="acara">
+    <div class="reveal">
+      <p class="eyebrow">Rangkaian Acara</p>
+      
+      <div class="cd-grid reveal d1" style="margin-bottom: 4rem">
+        <div class="cd-box"><span class="cd-num" id="cd-days">--</span><span class="cd-label">Hari</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-hours">--</span><span class="cd-label">Jam</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-mins">--</span><span class="cd-label">Menit</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-secs">--</span><span class="cd-label">Detik</span></div>
+      </div>
+
+      <div class="glass-card event-card reveal d2">
+        <p class="eyebrow">Akad Nikah</p>
+        <h3 class="e-title">09.00 WIB - Selesai</h3>
+        <p class="e-detail"><strong>Grha Saraswati Wonogiri</strong><br>Wonogiri, Jawa Tengah</p>
+        <a href="https://maps.app.goo.gl/6m2CWGgoAXXqwUZS9" target="_blank" rel="noopener" class="btn-gold">Google Maps</a>
+      </div>
+
+      <div class="glass-card event-card reveal d3">
+        <p class="eyebrow">Resepsi Pernikahan</p>
+        <h3 class="e-title">11.00 WIB - Selesai</h3>
+        <p class="e-detail"><strong>Grha Saraswati Wonogiri</strong><br>Wonogiri, Jawa Tengah</p>
+        <a href="https://maps.app.goo.gl/6m2CWGgoAXXqwUZS9" target="_blank" rel="noopener" class="btn-gold">Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section" id="gallery">
+    <div class="reveal">
+      <p class="eyebrow">Galeri</p>
+      <h2 class="gold-text" style="font-size:2.5rem; margin-bottom:2rem">Momen Bahagia</h2>
+      <div class="gallery-strip reveal d1">
+        <div class="gallery-item"><img src="assets/img/gallery_1.png" alt="Momen 1" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/img/gallery_2.png" alt="Momen 2" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/img/gallery_3.png" alt="Momen 3" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/img/gallery_4.png" alt="Momen 4" loading="lazy"></div>
+        <div class="gallery-item"><img src="assets/img/gallery_5.png" alt="Momen 5" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="section" id="rsvp">
+    <div class="sec-bg" style="--speed: 0.2"><img src="assets/img/mountain.png" alt="" style="opacity:0.04; transform:rotate(180deg)"></div>
+    <div class="glass-card reveal">
+      <p class="eyebrow">Konfirmasi Kehadiran</p>
+      <h2 class="gold-text" style="font-size:2.5rem; margin-bottom:1.5rem">RSVP</h2>
+      
+      <div class="rsvp-form">
+        <div class="form-group">
+          <label for="rn">Nama Lengkap</label>
+          <input type="text" id="rn" class="form-input" placeholder="Tulis nama Anda" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label>Kehadiran</label>
+          <div class="rsvp-opts">
+            <div class="rsvp-opt sel" id="opt-y" onclick="setAttend('y')">✓ Hadir</div>
+            <div class="rsvp-opt" id="opt-n" onclick="setAttend('n')">✗ Tidak Hadir</div>
+          </div>
+        </div>
+        <div class="form-group" id="jml-grp">
+          <label for="rcount">Jumlah Tamu</label>
+          <input type="number" id="rcount" class="form-input" value="1" min="1" max="10" inputmode="numeric">
+        </div>
+        <div class="form-group">
+          <label for="rmsg">Pesan & Doa</label>
+          <textarea id="rmsg" class="form-input" rows="4" placeholder="Tuliskan ucapan dan doa untuk kedua mempelai…"></textarea>
+        </div>
+        <button id="submit-btn" class="btn-submit" onclick="submitRSVP()"><span>Kirim Konfirmasi</span></button>
+      </div>
+      
+      <div id="rsvp-success" style="display:none; padding:2rem 0; color:var(--gold)">
+        <h3 style="font-size:1.5rem; margin-bottom:0.5rem">Terima Kasih!</h3>
+        <p style="font-size:0.9rem; color:var(--text-muted)">Konfirmasi kehadiran dan doa Anda telah kami terima.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WISHES -->
+  <section class="section" id="wishes">
+    <div class="glass-card reveal">
+      <p class="eyebrow">Daftar Doa & Ucapan</p>
+      <h2 class="gold-text" style="font-size:2.3rem; margin-bottom:2rem">Ucapan</h2>
+      
+      <div class="wishes-list" id="wishes-list">
+        <!-- Akan dimuat secara dinamis oleh JavaScript -->
+        <p style="text-align:center; color:var(--text-muted); font-style:italic; padding:2rem 0">Memuat ucapan...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIFT -->
+  <section class="section" id="gift">
+    <div class="reveal">
+      <p class="eyebrow">Wedding Gift</p>
+      <h2 class="gold-text" style="font-size:2.5rem; margin-bottom:1.5rem">Kirim Hadiah</h2>
+      <p style="color:var(--text-muted); font-size:0.95rem; max-width:380px; margin:0 auto 2rem">
+        Doa restu Anda adalah hadiah yang paling berharga. Namun jika ingin memberikan tanda kasih:
+      </p>
+      <div class="glass-card gift-card reveal d1">
+        <p class="eyebrow" style="margin-bottom:0.5rem">Bank Mandiri</p>
+        <p style="font-size:1.15rem; font-family:'Cormorant Garamond', serif; color:var(--text-muted); margin-bottom:0.5rem">Reineta Dian Kusumawati</p>
+        <p class="gold-text" style="font-size:1.7rem; font-family:'Cormorant Garamond', serif; letter-spacing:0.1em; margin-bottom:1.5rem; font-weight:600">1234567890</p>
+        <button class="btn-gold" style="cursor:pointer; background:none;" onclick="copyAcc('1234567890')">Salin Rekening</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="padding: 6rem 2rem; text-align: center; border-top: 1px solid var(--glass-bd)">
+    <h2 class="gold-text" style="font-size: 2.2rem; margin-bottom: 0.5rem">Azki & Rein</h2>
+    <p class="eyebrow" style="font-size: 0.5rem">Terima kasih atas doa & restunya</p>
+  </footer>
+
+</main>
+
+<script>
+document.getElementById('closeLbBtn').addEventListener('click', closeLb);
+// Parallax Scroll variable updater
+window.addEventListener('scroll', () => {
+  requestAnimationFrame(() => {
+    document.body.style.setProperty('--scrollY', window.scrollY + 'px');
+  });
+});

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Wedding Of Azki &amp; Rein</title>
+<meta name="description" content="Undangan Pernikahan Azkiya Tsany Baharsyah &amp; Reineta Dian Kusumawati — Sabtu, 28 November 2026 di Grha Saraswati Wonogiri">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══ GLOBAL OVERLAYS ══ -->
+<div id="scroll-progress"></div>
+<canvas id="confetti-canvas"></canvas>
+<div id="toast"></div>
+<canvas id="pc"></canvas>
+<div class="copy-toast" id="copyToast">✓ Nomor rekening tersalin</div>
+
+<audio id="bgm" loop preload="auto">
+  <source src="https://raw.githubusercontent.com/azkrekk/undangan-rekiya/main/musik.mp3" type="audio/mpeg">
+</audio>
+<button id="mp" onclick="toggleMusic()" aria-label="Play atau pause musik">
+  <div class="disc" id="disc"></div>
+</button>
+
+<!-- ══ COVER — 3D DIORAMA ══ -->
+<div id="cover">
+  <!-- 3D Scene Layers -->
+  <div class="diorama-scene">
+    <div class="dl dl-bg"></div>
+    <div class="dl dl-mountain"><img src="assets/img/mountain.png" alt=""></div>
+    <div class="dl dl-joglo"><img src="assets/img/Joglo.png" alt=""></div>
+    <div class="dl dl-flora"><img src="assets/img/flowers-bottom.png" alt=""></div>
+    <div class="dl dl-wisteria"><img src="assets/img/wisteria-top.png" alt=""></div>
+    <div class="dl dl-couple">
+      <img src="assets/img/rama.png" class="wayang-rama" alt="">
+      <img src="assets/img/Shinta.png" class="wayang-shinta" alt="">
+    </div>
+    <div class="dl dl-leaves">
+      <img src="assets/img/rama.png" class="l-tl" alt="">
+      <img src="assets/img/Shinta.png" class="l-tr" alt="">
+    </div>
+    <div id="vanta-bg"></div>
+  </div>
+  <!-- Majestic Wedding Gate (Split Doors) -->
+  <div class="gate-wrapper">
+    <div class="gate-panel gate-left"></div>
+    <div class="gate-panel gate-right"></div>
+  </div>
+  <!-- Ornamental Frame -->
+  <div class="cover-frame"></div>
+  <div class="co co-tl"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 38 L2 2 L38 2" stroke="#B8963E" stroke-width="1" stroke-opacity="0.5"/><path d="M8 32 L8 8 L32 8" stroke="#B8963E" stroke-width="0.5" stroke-opacity="0.25"/><circle cx="2" cy="2" r="1.5" fill="#B8963E" fill-opacity="0.6"/></svg></div>
+  <div class="co co-tr"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 38 L2 2 L38 2" stroke="#B8963E" stroke-width="1" stroke-opacity="0.5"/><path d="M8 32 L8 8 L32 8" stroke="#B8963E" stroke-width="0.5" stroke-opacity="0.25"/><circle cx="2" cy="2" r="1.5" fill="#B8963E" fill-opacity="0.6"/></svg></div>
+  <div class="co co-bl"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 38 L2 2 L38 2" stroke="#B8963E" stroke-width="1" stroke-opacity="0.5"/><path d="M8 32 L8 8 L32 8" stroke="#B8963E" stroke-width="0.5" stroke-opacity="0.25"/><circle cx="2" cy="2" r="1.5" fill="#B8963E" fill-opacity="0.6"/></svg></div>
+  <div class="co co-br"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 38 L2 2 L38 2" stroke="#B8963E" stroke-width="1" stroke-opacity="0.5"/><path d="M8 32 L8 8 L32 8" stroke="#B8963E" stroke-width="0.5" stroke-opacity="0.25"/><circle cx="2" cy="2" r="1.5" fill="#B8963E" fill-opacity="0.6"/></svg></div>
+  <!-- Cover Content (frontmost layer) -->
+  <div class="cover-inner">
+    <p class="c-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+    <p class="c-label">The Wedding Of</p>
+    <h1 class="c-names">Azkiya<span >&amp;</span>Reineta</h1>
+    <div class="c-ornline"><span>✦</span></div>
+    <p class="c-date">SABTU · 28 NOVEMBER 2026</p>
+    <p class="c-guest-label">Kepada Yth.</p>
+    <p class="c-guest-name" id="guestName">Tamu Undangan</p>
+    <button class="btn-open" onclick="bukaUndangan()"><span>Buka Undangan</span></button>
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<main id="main">
+
+  <!-- ════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <img src="assets/img/wisteria-top.png" alt="" class="hero-wist" aria-hidden="true">
+    <img src="assets/img/flowers-bottom.png" alt="" class="hero-flora" aria-hidden="true">
+    <div class="sec-bg hero-mtn-bg" data-speed="0.25"><img src="assets/img/mountain.png" alt="" class="hero-mtn-img"></div>
+    <div class="sec-bg hero-joglo-bg" data-speed="0.12"><img src="assets/img/Joglo.png" alt="" class="hero-joglo-img"></div>
+    <img src="assets/img/Peony.png" alt="" class="hero-flower-l" aria-hidden="true">
+    <img src="assets/img/rama.png" alt="" class="hero-janur-l" aria-hidden="true">
+    <img src="assets/img/BlushFlowers.png" alt="" class="hero-flower-r" aria-hidden="true">
+    <img src="assets/img/Shinta.png" alt="" class="hero-janur-r" aria-hidden="true">
+    <div class="hero-inner">
+      <div class="ornfloral rv d3" style="max-width:min(40px,55%);opacity:.4"><img src="assets/img/padi.png" alt=""></div>
+      <p class="hero-eyebrow rv">The Wedding Of</p>
+      <h1 class="hero-names rv d1">Azki<em>&amp; Rein</em></h1>
+      <div class="ornline ornline-dk rv d2"><span>✦</span></div>
+      <p class="hero-date rv d3">Sabtu, 28 November 2026</p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- FLORAL DIVIDER -->
+  <div style="position:relative;overflow:hidden;height:0;margin:0">
+    <div style="position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:min(500px,90vw);opacity:.15;pointer-events:none">
+      <img src="assets/img/flowers-bottom.png" alt="" style="width:100%">
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       QUOTE
+  ════════════════════════════════════════ -->
+  <section class="quote-sec" id="quote">
+    <div class="sec-bg" data-speed="0.18"><img src="assets/img/gunungan.png" alt="" style="opacity:.04;width:min(350px,60vw)"></div>
+    <div class="batik-bg" aria-hidden="true"></div>
+    <img src="assets/img/wisteria-top.png" alt="" class="sec-wist-watermark" aria-hidden="true">
+    <p class="q-arabic rv">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
+    <div class="ornline ornline-dk rv d1"><span>✦</span></div>
+    <p class="q-text rv d2">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."</p>
+    <p class="q-ref rv d3">— QS. Ar-Rum : 21 —</p>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       COUPLE
+  ════════════════════════════════════════ -->
+  <section class="couple-sec" id="couple">
+    <p class="s-eye rv">Mempelai</p>
+    <h2 class="s-title rv d1">Kedua <em>Mempelai</em></h2>
+    <div class="ornline rv d2"><span>✦</span></div>
+    <p class="sec-intro rv d3">Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu.</p>
+    <div class="ornfloral rv d3" style="max-width:min(100px,55%);opacity:.4"><img src="assets/img/padi.png" alt=""></div>
+    <div class="couple-grid">
+      <div class="card rv-l">
+        <div class="card-corner tl"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner tr"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner bl"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner br"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-photo"><img src="assets/img/azkia.png" alt="Azkiya" onerror="this.parentElement.innerHTML='🤵'"></div>
+        <p class="card-role">Mempelai Pria</p>
+        <h3 class="card-name">Azkiya</h3>
+        <p class="card-fullname">Azkiya Tsany Baharsyah, M.Ag.</p>
+        <div class="card-div"></div>
+        <p class="card-parents">Putra dari<strong>Bapak Muntohar &amp; Ibu Siti Asbangunah</strong></p>
+      </div>
+      <div class="and-sep rv-s">&amp;</div>
+      <div class="card rv-r">
+        <div class="card-corner tl"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner tr"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner bl"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-corner br"><svg viewBox="0 0 20 20" fill="none"><path d="M1 19 L1 1 L19 1" stroke="#B8963E" stroke-width="0.75" stroke-opacity="0.4"/></svg></div>
+        <div class="card-photo"><img src="assets/img/rein.png" alt="Reineta" onerror="this.parentElement.innerHTML='👰'"></div>
+        <p class="card-role">Mempelai Wanita</p>
+        <h3 class="card-name">Reineta</h3>
+        <p class="card-fullname">Reineta Dian Kusumawati, S.Pd.</p>
+        <div class="card-div"></div>
+        <p class="card-parents">Putri dari<strong>Bapak Toyik Haryanto &amp; Ibu Nur 'Aini</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       TIME CORRIDOR — 3D Cinematic Scroll
+  ════════════════════════════════════════ -->
+  <section class="corridor-wrapper" id="time-corridor">
+    <div class="corridor-viewport">
+      <div class="corridor-scene">
+        <!-- Rails (perspective lines converging) -->
+        <div class="corridor-rail left"></div>
+        <div class="corridor-rail right"></div>
+        <!-- Light beams -->
+        <div class="corridor-beam" style="left:20%;animation-delay:0s"></div>
+        <div class="corridor-beam" style="left:50%;animation-delay:1.5s"></div>
+        <div class="corridor-beam" style="left:80%;animation-delay:3s"></div>
+
+        <!-- Year Markers -->
+        <div class="year-marker" data-z="-800" style="left:20%;">2022</div>
+        <div class="year-marker" data-z="-1600" style="right:20%;">2023</div>
+        <div class="year-marker" data-z="-2400" style="left:15%;">2024</div>
+        <div class="year-marker" data-z="-2400" style="left:15%;">2025</div>
+        <div class="year-marker" data-z="-2400" style="left:15%;">2026</div>
+        <div class="year-marker" data-z="-3200" style="right:15%; color:var(--coral);">Till Now</div>
+
+        <!-- Polaroids -->
+        <div class="polaroid" data-z="-600" data-side="left">
+          <img src="assets/img/gallery_1.png" alt="Early Days" loading="lazy">
+          <div class="polaroid-label">Awal mula</div>
+        </div>
+        <div class="polaroid" data-z="-1400" data-side="right">
+          <img src="assets/img/gallery_2.png" alt="Together" loading="lazy">
+          <div class="polaroid-label">Bersama</div>
+        </div>
+        <div class="polaroid" data-z="-2200" data-side="left">
+          <img src="assets/img/gallery_3.png" alt="Growth" loading="lazy">
+          <div class="polaroid-label">Bertumbuh</div>
+        </div>
+        <div class="polaroid" data-z="-2800" data-side="right">
+          <img src="assets/img/gallery_4.png" alt="Happiness" loading="lazy">
+          <div class="polaroid-label">Kebersamaan</div>
+        </div>
+        <div class="polaroid" data-z="-3400" data-side="left">
+          <img src="assets/img/gallery_5.png" alt="Wedding" loading="lazy">
+          <div class="polaroid-label">Menuju hari H</div>
+        </div>
+
+        <!-- Corridor Title -->
+        <div class="corridor-title" data-z="-3600">The Journey Of <em>Rein And Azki</em></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       TIMELINE — Journey Grid Cards
+  ════════════════════════════════════════ -->
+  <section class="timeline-sec" id="timeline">
+    <!-- Year Scrubber (sticky) -->
+    <div class="year-scrubber">
+      <button class="year-btn active" data-year="2022">2022</button>
+      <button class="year-btn" data-year="2023">2023</button>
+      <button class="year-btn" data-year="2024">2024</button>
+      <button class="year-btn" data-year="2025">2025</button>
+      <button class="year-btn" data-year="2026">2026</button>
+
+    </div>
+
+    <div class="timeline-grid">
+      <!-- Card 1 -->
+      <div class="tl-card reveal" data-year="2022">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Awal Mula</p>
+        <p class="card-year-display">2022</p>
+        <p class="card-icon">🌱</p>
+        <h3 class="card-title-text">Titik Nol</h3>
+        <p class="card-desc">Pertemuan pertama di bangku perkuliahan. Sebuah sapaan kecil yang mengawali segalanya.</p>
+        <div class="card-result-row">
+          <span class="card-result-label">Hasil</span>
+          <span class="card-result-value positive">Benih cinta tertanam</span>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="tl-card reveal reveal-delay-1" data-year="2023">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Benih cinta itu mulai tumbuh</p>
+        <p class="card-year-display">2023</p>
+        <p class="card-icon">🦋</p>
+        <h3 class="card-title-text">Butterfly Era</h3>
+        <p class="card-desc">Saling bercerita dan tertawa bersama.</p>
+        <div class="card-result-row">
+          <span class="card-result-label">Senyuman</span>
+          <span class="card-result-value lesson">Seru sekali</span>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="tl-card reveal reveal-delay-2" data-year="2024">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Ujian</p>
+        <p class="card-year-display">2024</p>
+        <p class="card-icon">💼</p>
+        <h3 class="card-title-text">Terpisah jarak</h3>
+        <p class="card-desc">Kesibukan satu sama lain menguji komitmen</p>
+        <div class="card-result-row">
+          <span class="card-result-label">aduhh</span>
+          <span class="card-result-value positive">bertemu setaun sekali</span>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="tl-card reveal" data-year="2025">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Komitmen</p>
+        <p class="card-year-display">2025</p>
+        <p class="card-icon">🔥</p>
+        <h3 class="card-title-text">Suka &amp; Duka</h3>
+        <p class="card-desc">Meski masalah datang silih berganti, komitmen kita masih sama untuk selalu bersama</p>
+        <div class="card-result-row">
+          <span class="card-result-label">Fase goyah</span>
+          <span class="card-result-value negative">pengennya udahannn</span>
+        </div>
+      </div>
+
+
+      <!-- Card 6 — FEATURED -->
+      <div class="tl-card featured reveal reveal-delay-2" data-year="2026">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Engagement</p>
+        <p class="card-year-display">2026</p>
+        <p class="card-icon">💍</p>
+        <h3 class="card-title-text">Puncak &amp; Lamaran</h3>
+        <p class="card-desc">Azki melamar Rein di bawah langit Wonogiri. Sebuah momen yang tak terlupakan, disaksikan keluarga</p>
+        <div class="card-result-row">
+          <span class="card-result-label">07 Juni 2026</span>
+          <span class="card-result-value positive">She said YES ✨</span>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="tl-card reveal" data-year="2026">
+        <div class="card-border-glow"></div>
+        <div class="card-spotlight"></div>
+        <p class="card-tag">Pernikahan</p>
+        <p class="card-year-display">2026</p>
+        <p class="card-icon">🕊️</p>
+        <h3 class="card-title-text">Hari Bahagia</h3>
+        <p class="card-desc">Dua jiwa menjadi satu. Awal dari babak baru yang lebih indah bersama.</p>
+        <div class="card-result-row">
+          <span class="card-result-label">Ijab Qabul</span>
+          <span class="card-result-value positive">28 November 2026 - Selamanya ♾️</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       COUNTDOWN
+  ════════════════════════════════════════ -->
+  <section class="cd-sec" id="countdown">
+    <img src="assets/img/wisteria-top.png" alt="" class="sec-wist-top" aria-hidden="true">
+    <div class="sec-bg" data-speed="0.2"><img src="assets/img/mountain.png" alt="" style="opacity:.07"></div>
+    <p class="s-eye rv" style="color:var(--sage-lt)">Hitung Mundur</p>
+    <h2 class="s-title s-title-lt rv d1">Save the <em>Date</em></h2>
+    <div class="ornline ornline-dk rv d2"><span>✦</span></div>
+    <div class="cd-grid rv d3">
+      <div class="cd-item"><span class="cd-num" id="cd-days">--</span><span class="cd-lbl">Hari</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cd-hours">--</span><span class="cd-lbl">Jam</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cd-mins">--</span><span class="cd-lbl">Menit</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-item"><span class="cd-num" id="cd-secs">--</span><span class="cd-lbl">Detik</span></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       EVENT
+  ════════════════════════════════════════ -->
+  <section class="event-sec" id="event">
+    <div class="ornfloral rv d3" style="max-width:min(70px,55%);opacity:.4"><img src="assets/img/padi.png" alt=""></div>
+    <p class="s-eye rv">Rangkaian Acara</p>
+    <h2 class="s-title rv d1">Detail <em>Acara</em></h2>
+    <div class="event-card rv-s d3">
+      <div class="event-frame"></div>
+      <img src="assets/img/gunungan.png" alt="" class="event-gunungan" aria-hidden="true">
+      <p class="event-type">Akad Nikah &amp; Resepsi</p>
+      <h3 class="event-name">Akad &amp; Resepsi</h3>
+      <p class="event-row"><strong>Sabtu, 28 November 2026</strong></p>
+      <div class="event-div"></div>
+      <p class="event-row">Akad Nikah<strong>09.00 WIB – Selesai</strong></p>
+      <p class="event-row">Resepsi<strong>11.00 WIB – Selesai</strong></p>
+      <div class="event-div"></div>
+      <p class="event-row"><strong>Grha Saraswati Wonogiri</strong></p>
+      <p class="event-row">Wonogiri, Jawa Tengah</p>
+      <a href="https://maps.app.goo.gl/6m2CWGgoAXXqwUZS9" target="_blank" rel="noopener" class="btn-map"><span>📍 Lihat Peta</span></a>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       GALLERY
+  ════════════════════════════════════════ -->
+  <section class="gallery-sec" id="gallery">
+    <p class="s-eye rv" style="position:relative;z-index:3;padding:0 1.5rem">Galeri</p>
+    <h2 class="s-title s-title-lt rv d1" style="position:relative;z-index:3;padding:0 1.5rem;margin-bottom:1.2rem">Momen <em>Bahagia</em></h2>
+    <div class="gallery-strip rv d2">
+      <div class="gallery-item"><img src="assets/img/gallery_1.png" alt="Momen 1" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/img/gallery_2.png" alt="Momen 2" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/img/gallery_3.png" alt="Momen 3" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/img/gallery_4.png" alt="Momen 4" loading="lazy"></div>
+      <div class="gallery-item"><img src="assets/img/gallery_5.png" alt="Momen 5" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       RSVP
+  ════════════════════════════════════════ -->
+  <section class="rsvp-sec" id="rsvp">
+    <p class="s-eye rv">Konfirmasi</p>
+    <h2 class="s-title rv d1">Konfirmasi <em>Kehadiran</em></h2>
+    <div class="ornline rv d2"><span>✦</span></div>
+    <p class="sec-intro rv d3">Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan segalanya dengan sepenuh hati.</p>
+    <div class="rsvp-form rv d4">
+      <div class="fg">
+        <label for="rn">Nama Lengkap</label>
+        <input type="text" id="rn" placeholder="Tulis nama Anda" autocomplete="name">
+      </div>
+      <div class="fg">
+        <label>Kehadiran</label>
+        <div class="radio-grp">
+          <label class="radio-opt sel" id="optY" onclick="setAttend('y')"><input type="radio" name="attend" value="y" checked>✓ Hadir</label>
+          <label class="radio-opt" id="optN" onclick="setAttend('n')"><input type="radio" name="attend" value="n">✗ Tidak Hadir</label>
+        </div>
+      </div>
+      <div class="fg" id="jmlGrp">
+        <label for="rcount">Jumlah Tamu</label>
+        <input type="number" id="rcount" value="1" min="1" max="20" inputmode="numeric">
+      </div>
+      <div class="fg">
+        <label for="rmsg">Pesan &amp; Doa</label>
+        <textarea id="rmsg" rows="3" placeholder="Tuliskan ucapan dan doa untuk kedua mempelai…"></textarea>
+      </div>
+      <button class="btn-submit" id="submitBtn" onclick="submitRSVP()"><span>Kirim Konfirmasi</span></button>
+    </div>
+    <div id="rsvp-success"><div class="s-icon">🌸</div><p>Terima kasih telah mengkonfirmasi kehadiran Anda.<br>Kami dengan sukacita menantikan kehadiran Anda.</p></div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       WISHES
+  ════════════════════════════════════════ -->
+  <section class="wishes-sec" id="wishes">
+    <p class="s-eye rv">Ucapan</p>
+    <h2 class="s-title rv d1">Doa &amp; <em>Ucapan</em></h2>
+    <div class="ornline rv d2"><span>✦</span></div>
+    <div class="wishes-list" id="wishList">
+      <p style="text-align:center;color:var(--muted);font-style:italic;padding:2rem 0;font-family:'Cormorant Garamond',serif">Memuat ucapan...</p>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       GIFT
+  ════════════════════════════════════════ -->
+  <section class="gift-sec" id="gift">
+    <p class="s-eye rv">Wedding Gift</p>
+    <h2 class="s-title rv d1">Kirim <em>Hadiah</em></h2>
+    <div class="ornline rv d2"><span>✦</span></div>
+    <p class="sec-intro rv d2">Doa restu Anda adalah hadiah yang paling berharga. Namun jika ingin memberikan tanda kasih:</p>
+    <div class="gift-grid rv-s d3">
+      <div class="gift-card">
+        <div class="gift-bank-row">
+          <img src="assets/img/logo_mandiri.png" alt="Mandiri" class="gift-logo">
+          <span class="gift-bank">Bank Mandiri</span>
+        </div>
+        <p class="gift-name">Reineta Dian Kusumawati</p>
+        <p class="gift-acc">1370024622058</p>
+        <button class="btn-copy" onclick="copyAcc('1370024622058')"><span>Salin Nomor Rekening</span></button>
+      </div>
+      <div class="gift-card">
+        <div class="gift-bank-row">
+          <img src="assets/img/logo_bri.png" alt="BRI" class="gift-logo">
+          <span class="gift-bank">Bank BRI</span>
+        </div>
+        <p class="gift-name">Reineta Dian Kusumawati</p>
+        <p class="gift-acc">696301008328509</p>
+        <button class="btn-copy" onclick="copyAcc('696301008328509')"><span>Salin Nomor Rekening</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       FOOTER (Minimalist)
+  ════════════════════════════════════════ -->
+  <footer id="footer">
+    <img src="assets/img/wayang.png" alt="" class="footer-wayang" aria-hidden="true">
+    <div class="footer-left rv">
+      <p class="footer-names">Azki &amp; Rein</p>
+      <p class="footer-copy">© 2026 · Azki❤️Rein</p>
+    </div>
+    <div class="footer-right rv d2">
+      <p class="footer-mono">Dibuat dengan cinta 💛</p>
+      <p class="footer-mono">Oleh Kami dan untuk kami</p>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ══ FLOATING NAV ══ -->
+<nav class="f-nav" id="fnav" style="display:none" aria-label="Navigasi halaman">
+  <a class="f-nav-btn" href="#home" title="Home">🏠</a>
+  <a class="f-nav-btn" href="#couple" title="Mempelai">💑</a>
+  <a class="f-nav-btn" href="#timeline" title="Journey">🛤️</a>
+  <a class="f-nav-btn" href="#event" title="Acara">📅</a>
+  <a class="f-nav-btn" href="#rsvp" title="RSVP">✉</a>
+  <a class="f-nav-btn" href="#gift" title="Gift">🎁</a>
+</nav>
+
+<!-- ══ SCRIPTS ══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
